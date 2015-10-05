@@ -13,7 +13,7 @@
     },
     "autoload": {
         "psr-0": {
-            "{{vendor}}\\{{name}}": "src/"
+            "{{vendor}}\\{{name}}": "src/{{name}}"
         }
     },
     "minimum-stability": "stable"
