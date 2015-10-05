@@ -273,7 +273,8 @@ class PackageCreator {
 	 */
 	protected function writeProviderStub(Package $package, $directory, $stub)
 	{
-		$path = $this->createClassDirectory($package, $directory);
+		// In Laravel 5.1 this is similar to how it must be done. (kinda)
+		$path = $directory.'/src/'.$package->name;
 
 		// The primary source directory where the package's classes will live may not
 		// exist yet, so we will need to create it before we write these providers
