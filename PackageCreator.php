@@ -2,6 +2,10 @@
 
 use Illuminate\Filesystem\Filesystem;
 
+/**
+ * Class PackageCreator
+ * @package Illuminate\Workbench
+ */
 class PackageCreator
 {
 
@@ -47,12 +51,13 @@ class PackageCreator
         $this->files = $files;
     }
 
+
     /**
-     * Create a package with all resource directories.
+     * public function createWithResources(Package $package, $path)
      *
-     * @param  \Illuminate\Workbench\Package $package
-     * @param  string $path
-     * @return void
+     * @param Package $package
+     * @param $path
+     * @return string
      */
     public function createWithResources(Package $package, $path)
     {
