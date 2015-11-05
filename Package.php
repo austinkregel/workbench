@@ -45,6 +45,13 @@ class Package {
 	public $email;
 
 	/**
+	 * The current year.
+	 *
+	 * @var string
+	 */
+	public $year;
+
+	/**
 	 * Create a new package instance.
 	 *
 	 * @param  string  $vendor
@@ -59,6 +66,7 @@ class Package {
 		$this->email = $email;
 		$this->vendor = $vendor;
 		$this->author = $author;
+		$this->year = date('Y', strtotime('now'));
 		$this->lowerName = snake_case($name, '-');
 		$this->lowerVendor = snake_case($vendor, '-');
 	}
