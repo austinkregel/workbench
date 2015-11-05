@@ -43,8 +43,7 @@ class PackageCreator
     /**
      * Create a new package creator instance.
      *
-     * @param  \Illuminate\Filesystem\Filesystem $files
-     * @return void
+     * @param Filesystem $files
      */
     public function __construct(Filesystem $files)
     {
