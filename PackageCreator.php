@@ -147,6 +147,37 @@ class PackageCreator
     }
 
     /**
+     * Write the LICENSE stub file
+     *
+     * @param Package $package
+     * @param $directory
+     */
+    protected function writeLicenseFile(Package $package, $directory)
+    {
+        $stub = $this->files->get(__DIR__ . '/stubs/LICENSE.txt');
+
+        $stub = $this->formatPackageStub($package, $stub);
+
+        $this->files->put($directory . '/LICENSE.txt', $stub);
+    }
+
+    /**
+     * Format a generic package stub file.
+     *
+     * @param  \Illuminate\Workbench\Package $package
+     * @param  string $stub
+     * @return string
+     */
+    protected function formatPackageStub(Package $package, $stub)
+    {
+        foreach (get_object_vars($package) as $key => $value) {
+            $stub = str_replace('{{' . snake_case($key) . '}}', $value, $stub);
+        }
+
+        return $stub;
+    }
+
+    /**
      * Create the support directories for a package.
      *
      * @param  \Illuminate\Workbench\Package $package
@@ -324,20 +355,6 @@ class PackageCreator
     }
 
     /**
-     * Write the LICENSE stub file
-     *
-     * @param Package $package
-     * @param $directory
-     */
-    protected function writeLicenseFile(Package $package, $directory)
-    {
-        $stub = $this->files->get(__DIR__ . '/stubs/LICENSE.txt');
-
-        $stub = $this->formatPackageStub($package, $stub);
-
-        $this->files->put($directory.'/LICENSE.txt', $stub);
-    }
-    /**
      * Write the Composer.json stub file.
      *
      * @param  \Illuminate\Workbench\Package $package
@@ -365,22 +382,6 @@ class PackageCreator
         if ($plain) return $this->files->get(__DIR__ . '/stubs/plain.composer.json');
 
         return $this->files->get(__DIR__ . '/stubs/composer.json');
-    }
-
-    /**
-     * Format a generic package stub file.
-     *
-     * @param  \Illuminate\Workbench\Package $package
-     * @param  string $stub
-     * @return string
-     */
-    protected function formatPackageStub(Package $package, $stub)
-    {
-        foreach (get_object_vars($package) as $key => $value) {
-            $stub = str_replace('{{' . snake_case($key) . '}}', $value, $stub);
-        }
-
-        return $stub;
     }
 
 }
